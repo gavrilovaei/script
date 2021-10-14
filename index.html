@@ -1,33 +1,77 @@
 <!DOCTYPE html>
-<html lang="en">
+<!-- <html lang="en">
 
 <head>
 	<meta charset="UTF-8">
 	<title>uniMail</title>
 </head>
 
-<body>
+<body> -->
 
-	<form>
+<!-- <form> -->
 
-		<!-- Hidden Required Fields -->
-		<input type="hidden" name="project_name" value="Site Name">
+<!-- Hidden Required Fields -->
+<!-- <input type="hidden" name="project_name" value="Site Name">
 		<input type="hidden" name="admin_email" value="gavrilova-e@yandex.ru">
-		<input type="hidden" name="form_subject" value="Form Subject">
-		<!-- END Hidden Required Fields -->
+		<input type="hidden" name="form_subject" value="Form Subject"> -->
+<!-- END Hidden Required Fields -->
 
-		<input type="text" name="Name" placeholder="You name..." required><br>
+<!-- <input type="text" name="Name" placeholder="You name..." required><br>
 		<input type="text" name="E-mail" placeholder="You E-mail..." required><br>
 		<input type="text" name="Phone" placeholder="You phone..."><br>
-		<button type="submit">Send</button>
+		<button type="submit">Send</button> -->
 
-	</form>
 
-		<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+
+<!-- </form> -->
+
+<!-- <form action="mail.php" method="post">
+		<input type="text" name="fio" placeholder="Укажите ФИО" required>
+		<input type="text" name="email" placeholder="Укажите e-mail" required>
+		<input type="submit" value="Отправить">
+	</form> -->
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
 	</script> -->
-	<script src="script.js"></script>
+<!-- <script src="script.js"></script> -->
 
+<!-- </body>
+
+</html> -->
+
+<html>
+
+<head>
+	<title>Форма заявки с сайта</title>
+</head>
+
+<body>
+	<?php
+//проверяем, существуют ли переменные в массиве POST
+if(!isset($_POST['fio']) and !isset($_POST['email'])){
+ ?>
+	<form action="send.php" method="post">
+		<input type="text" name="fio" placeholder="Укажите ФИО" required>
+		<input type="text" name="email" placeholder="Укажите e-mail" required>
+		<input type="submit" value="Отправить">
+	</form>
+	<?php
+} else {
+ //показываем форму
+ $fio = $_POST['fio'];
+ $email = $_POST['email'];
+ $fio = htmlspecialchars($fio);
+ $email = htmlspecialchars($email);
+ $fio = urldecode($fio);
+ $email = urldecode($email);
+ $fio = trim($fio);
+ $email = trim($email);
+ if (mail("gavrilova-e@yandex.ru", "Заявка с сайта", "ФИО:".$fio.". E-mail: ".$email ,"From: example2@mail.ru \r\n")){
+ echo "Сообщение успешно отправлено";
+ } else {
+ echo "При отправке сообщения возникли ошибки";
+ }
+}
+?>
 </body>
 
 </html>
